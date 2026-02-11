@@ -1,26 +1,36 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from 'react-router'
+import { signUp } from "../../services/authService"
+
+import { UserContext} from '../../contexts/UserContext'
 
 const initialData={
     username : '',
     email: "",
+    role: "",
     password: "",
     passwordConfirm: ""
 }
 
 const SignUpForm =()=>{
     const navigate = useNavigate()
+    
+    const {setUser} = useContext(UserContext)
+    
     const [message, setMessage] = useState("");
-
     const [formData,setFormData] = useState(initialData)
 
-     const { username, email, password, passwordConfirm} = formData
+    const { username, email, role, password, passwordConfirm} = formData
 
 
     const handleSubmit = async(evt) =>{
         evt.preventDefault()
         try{
-            console.log(formData)
+            const newUser = await signUp(formData)
+            console.log(newUser)
+            setUser(newUser)
+            navigate('/')
+
         }catch(err){
             setMessage(err.message)
         }
@@ -62,7 +72,18 @@ const SignUpForm =()=>{
                         onChange={handleChange}
                         required
                     />
-
+                    <label htmlFor="role">Select your role</label>
+                    <select
+                        id="role"
+                        name="role"
+                        value={role}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value=""> Select a role </option>
+                        <option value="student">Student</option>
+                        <option value="instructor">Instructor</option>
+                    </select>
                     <label htmlFor="password">Password:</label>
                     <input
                         type="password"
