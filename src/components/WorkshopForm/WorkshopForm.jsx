@@ -1,5 +1,6 @@
-import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router"
+import * as workshopService from '../../services/workshopService'
 
 const initialData ={
     title:"",
@@ -17,14 +18,41 @@ const initialData ={
     materials_to_bring: "", 
 }
 
-const WorkshopForm = ({handleAddWorkshop}) =>{
+const WorkshopForm = ({handleAddWorkshop, handleUpdateWorkshop}) =>{
 
     const navigate = useNavigate()
+    const {workshopId} = useParams()
     const [message,setMessage] = useState("")
     const [formData, setFormData] = useState(initialData)
     const [imageFile, setImageFile] = useState(null)
 
     const {title, description, art_type,level,workshop_date, start_time, duration_hours ,address, city, state, max_capacity,materials_included, materials_to_bring} = formData
+
+
+    useEffect(()=>{
+        const fetchWorkshop = async() =>{
+            if (!workshopId) return
+            const workshopData = await workshopService.show(workshopId)
+
+            setFormData({
+                title:workshopData.title || "",
+                description:workshopData.description || "",
+                art_type: workshopData.art_type || "",
+                level: workshopData.level || "",
+                workshop_date: workshopData.workshop_date || "",
+                start_time: workshopData.start_time || "",
+                duration_hours: workshopData.duration_hours || 0,
+                address: workshopData.address || "",
+                city: workshopData.city || "",
+                state: workshopData.state || "",
+                max_capacity:workshopData.max_capacity || 1,
+                materials_included: workshopData.materials_included || "",
+                materials_to_bring: workshopData.materials_to_bring || "", 
+            })
+        }
+        fetchWorkshop()
+    },[workshopId])
+
 
     const handleSubmit = (evt)=>{
         evt.preventDefault()
@@ -48,8 +76,12 @@ const WorkshopForm = ({handleAddWorkshop}) =>{
         if (imageFile) {
             data.append('image_url', imageFile)
         }
-        
-        handleAddWorkshop(data)
+        if (workshopId){
+            handleUpdateWorkshop(workshopId,data)
+        }else{
+            
+            handleAddWorkshop(data)
+        }
 
     }
     
@@ -64,7 +96,7 @@ const WorkshopForm = ({handleAddWorkshop}) =>{
 
     return(
         <main>
-            <h1> New Workshop</h1>
+            <h1> {workshopId? 'Edit Workshop' : 'New Workshop'}</h1>
             {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
                <div>
@@ -230,7 +262,7 @@ const WorkshopForm = ({handleAddWorkshop}) =>{
 
                 </div>
                 <div>
-                     <button disabled={isFormInvalid()}>New Workshop</button>
+                     <button disabled={isFormInvalid()}>{workshopId? 'Edit Workshop' : 'New Workshop'}</button>
                     <button onClick={() => navigate('/')}>Cancel</button>
                 </div>
 
