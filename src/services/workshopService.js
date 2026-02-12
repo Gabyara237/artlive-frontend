@@ -46,6 +46,10 @@ const create = async (workshopFormData)=>{
             },
             body: workshopFormData,
         })
+        if (!res.ok) {
+            const errorData = await res.json()
+            throw new Error(errorData.err)
+        }
         return res.json()
     }catch(err){
         throw new Error(err)
@@ -53,4 +57,24 @@ const create = async (workshopFormData)=>{
 
 }
 
-export {index, show, create}
+const updateWorkshop = async (workshopId, workshopFormData)=>{
+    try {
+        const res = await fetch(`${BASE_URL}/${workshopId}`, {
+            method:'PUT',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: workshopFormData,
+        })
+        if (!res.ok) {
+            const errorData = await res.json()
+            throw new Error(errorData.err)
+        }
+        return res.json()
+    }catch(err){
+        throw new Error(err)
+    }
+
+}
+
+export {index, show, create, updateWorkshop}

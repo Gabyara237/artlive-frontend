@@ -1,13 +1,16 @@
 
-import { useEffect, useState } from "react"
-import { useParams } from "react-router"
+import { useContext, useEffect, useState } from "react"
+import { Link, useParams } from "react-router"
 
 import * as workshopService from '../../services/workshopService'
+import { UserContext } from "../../contexts/UserContext"
 
 const WorkshopDetail = () =>{
     const {workshopId} = useParams()
     console.log(workshopId)
     const [workshop, setWorkshop]= useState(null)
+
+    const {user} = useContext(UserContext)
 
     useEffect(()=>{
         const fetchWorkshop = async () =>{
@@ -40,6 +43,14 @@ const WorkshopDetail = () =>{
                 <p>{workshop.materials_to_bring}</p>
                 <p>{workshop.image_url}</p>
                 <p>{workshop.created_at}</p>
+            </div>
+            <div>
+                
+                {workshop.instructor_id === user.id && (
+                        <>
+                            <Link to={`/workshops/${workshopId}/edit`}>Edit</Link>  
+                        </>
+                    )}
             </div>
         </main>
     )

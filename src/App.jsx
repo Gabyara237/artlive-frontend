@@ -37,6 +37,16 @@ const App = () => {
     navigate('/workshops')
   }
 
+  const handleUpdateWorkshop = async (workshopId, workshopFormData) =>{
+
+    const updateWorkshop = await workshopService.updateWorkshop(workshopId,workshopFormData)
+    setWorkshops(
+      workshops.map((workshop)=>
+        workshop.id === updateWorkshop.id? workshopFormData :workshop,
+      ),
+    )
+    navigate(`/workshops/${workshopId}`)
+  }
 
   return(
     <>
@@ -50,7 +60,10 @@ const App = () => {
             <Route path='/workshops/:workshopId' element={<WorkshopDetail/>}></Route>
 
             {user.role === "instructor" && (
-              <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop}/>}></Route>
+              <>
+                <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop} handleUpdateWorkshop={handleUpdateWorkshop}/>}></Route>
+                <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop}/>} ></Route>
+              </>
             )}
 
           </>
