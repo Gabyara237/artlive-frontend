@@ -6,7 +6,7 @@ const WorkshopList = ({workshops}) =>{
         <main>
             {workshops.map((workshop)=>(
 
-                <Link key={workshop.id} className="card-container" to={`/workshop/${workshop.id}`}>
+                <Link key={workshop.id} className="card-container" to={`/workshops/${workshop.id}`}>
                     <div>
                         <h2>{workshop.title}</h2>
                     </div>
