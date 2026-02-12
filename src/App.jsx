@@ -42,10 +42,18 @@ const App = () => {
     const updateWorkshop = await workshopService.updateWorkshop(workshopId,workshopFormData)
     setWorkshops(
       workshops.map((workshop)=>
-        workshop.id === updateWorkshop.id? workshopFormData :workshop,
+        workshop.id === updateWorkshop.id? updateWorkshop :workshop,
       ),
     )
     navigate(`/workshops/${workshopId}`)
+  }
+
+  const handleDeleteWorkshop = async (workshopId)=>{
+
+    const deleteWorkshop = await workshopService.deleteWorkshop(workshopId)
+    const filteredworkshops = workshops.filter((workshop) => workshop.id !== deleteWorkshop.id)
+    setWorkshops(filteredworkshops)
+    navigate('/workshops')
   }
 
   return(
@@ -57,12 +65,12 @@ const App = () => {
           <>
           
             <Route path='/workshops' element={<WorkshopList workshops={workshops}/>}></Route>
-            <Route path='/workshops/:workshopId' element={<WorkshopDetail/>}></Route>
+            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop}/>}></Route>
 
             {user.role === "instructor" && (
               <>
                 <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop} handleUpdateWorkshop={handleUpdateWorkshop}/>}></Route>
-                <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop}/>} ></Route>
+                <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop} />} ></Route>
               </>
             )}
 

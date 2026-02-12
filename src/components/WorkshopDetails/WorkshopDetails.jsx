@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router"
 import * as workshopService from '../../services/workshopService'
 import { UserContext } from "../../contexts/UserContext"
 
-const WorkshopDetail = () =>{
+const WorkshopDetail = ({handleDeleteWorkshop}) =>{
     const {workshopId} = useParams()
     console.log(workshopId)
     const [workshop, setWorkshop]= useState(null)
@@ -49,6 +49,9 @@ const WorkshopDetail = () =>{
                 {workshop.instructor_id === user.id && (
                         <>
                             <Link to={`/workshops/${workshopId}/edit`}>Edit</Link>  
+                             <button onClick={() => handleDeleteWorkshop(workshopId)}>
+                                Delete
+                            </button>
                         </>
                     )}
             </div>
