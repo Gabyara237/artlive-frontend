@@ -9,6 +9,7 @@ import WorkshopList from './components/WorkshopList/WorkshopList';
 import { UserContext } from './contexts/UserContext';
 
 import * as workshopService from './services/workshopService.js'
+import WorkshopDetail from './components/WorkshopDetails/WorkshopDetails.jsx';
 
 
 const App = () => {
@@ -33,9 +34,18 @@ const App = () => {
       <NavBar/>
       <Routes>
         <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<h1>Hello world!</h1>}></Route>
-        <Route path={'/sign-up'} element={<SignUpForm/>}></Route>
-        <Route path={'/sign-in'} element={<SignInForm/>}></Route>
+        {user? (
+          <>
+            
+            <Route path={'/workshop/:workshopId'} element={<WorkshopDetail/>}></Route>
 
+          </>
+        ):(
+          <>
+            <Route path={'/sign-up'} element={<SignUpForm/>}></Route>
+            <Route path={'/sign-in'} element={<SignInForm/>}></Route>
+          </>
+        )}
       </Routes>
   
     </>
