@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from 'react-router'
+import { signIn } from "../../services/authService"
+import { UserContext } from "../../contexts/UserContext"
 
 
 const initialData={
@@ -10,15 +12,20 @@ const initialData={
 const SignInForm =() =>{
     const navigate = useNavigate()
 
+    const {setUser} = useContext(UserContext)
+
     const [formData, setFormData] = useState(initialData);
     const [message, setMessage] = useState("");
 
     const {username, password} = formData;
 
-    const handleSubmit = (evt) =>{
+    const handleSubmit = async (evt) =>{
         evt.preventDefault()
         try{
-            console.log(formData)
+            const signedInUser = await signIn(formData)
+            setUser(signedInUser)
+            navigate('/')
+
         }catch(err){
             setMessage(err.message)
         }
