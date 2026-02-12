@@ -19,4 +19,22 @@ const index = async ()=>{
 
 }
 
-export {index}
+const show = async (workshopId)=>{
+    try{
+        const res = await fetch(`${BASE_URL}/${workshopId}`,{
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+        if (!res.ok) {
+            const errorData = await res.json()
+            throw new Error(errorData.err)
+        }
+        return res.json()
+    }catch(err){
+        throw new Error(err)
+    }
+
+}
+
+export {index, show}
