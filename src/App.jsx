@@ -36,14 +36,14 @@ const App = () => {
         <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<h1>Hello world!</h1>}></Route>
         {user? (
           <>
-            
-            <Route path={'/workshop/:workshopId'} element={<WorkshopDetail/>}></Route>
+            <Route path='/workshops' element={<WorkshopList workshops={workshops}/>}></Route>
+            <Route path='/workshop/:workshopId' element={<WorkshopDetail/>}></Route>
 
           </>
         ):(
           <>
-            <Route path={'/sign-up'} element={<SignUpForm/>}></Route>
-            <Route path={'/sign-in'} element={<SignInForm/>}></Route>
+            <Route path='/sign-up' element={<SignUpForm/>}></Route>
+            <Route path='/sign-in' element={<SignInForm/>}></Route>
           </>
         )}
       </Routes>
