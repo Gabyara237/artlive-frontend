@@ -32,7 +32,7 @@ const App = () => {
     <>
       <NavBar/>
       <Routes>
-        <Route path={'/'} element ={user?<WorkshopList/> :<h1>Hello world!</h1>}></Route>
+        <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<h1>Hello world!</h1>}></Route>
         <Route path={'/sign-up'} element={<SignUpForm/>}></Route>
         <Route path={'/sign-in'} element={<SignInForm/>}></Route>
 
