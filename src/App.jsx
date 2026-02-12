@@ -1,6 +1,6 @@
 
 import { useContext, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useNavigate } from 'react-router';
 import './App.css'
 
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -16,7 +16,7 @@ import { UserContext } from './contexts/UserContext';
 
 
 const App = () => {
-
+  const navigate = useNavigate()
   const {user} = useContext(UserContext)
 
   const [workshops, setWorkshops] = useState([])
@@ -29,7 +29,13 @@ const App = () => {
     if (user) fetchAllWorkshops()
   },[user])
 
-  console.log(workshops)
+
+  const handleAddWorkshop = async( workshopFormData) =>{
+
+    const newWorkshop = await workshopService.create(workshopFormData)
+    setWorkshops([newWorkshop, ...workshops])
+    navigate('/workshops')
+  }
 
 
   return(
@@ -44,7 +50,7 @@ const App = () => {
             <Route path='/workshops/:workshopId' element={<WorkshopDetail/>}></Route>
 
             {user.role === "instructor" && (
-              <Route path="/workshops/new" element={<WorkshopForm/>}></Route>
+              <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop}/>}></Route>
             )}
 
           </>

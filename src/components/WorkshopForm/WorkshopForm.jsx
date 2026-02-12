@@ -52,16 +52,16 @@ const WorkshopForm = ({handleAddWorkshop}) =>{
         handleAddWorkshop(data)
 
     }
+    
     const handleChange = (evt)=>{
         setMessage("")
         setFormData({...formData, [evt.target.name]: evt.target.value})
     }
 
     const isFormInvalid = ()=>{
-
         return !(title && description &&  art_type && level && workshop_date && start_time && Number(duration_hours) > 0 && address &&  city && state && max_capacity)
-
     }
+
     return(
         <main>
             <h1> New Workshop</h1>
@@ -96,6 +96,7 @@ const WorkshopForm = ({handleAddWorkshop}) =>{
                         onChange={handleChange}
                         required
                     >
+                        <option value="">-- Select a category --</option>
                         <option value='watercolor_painting'>Watercolor Painting</option>
                         <option value='oil_painting'>Oil Painting</option>
                         <option value='acrylic_painting'>Acrylic Painting</option>
@@ -117,6 +118,7 @@ const WorkshopForm = ({handleAddWorkshop}) =>{
                         onChange={handleChange}
                         required
                     >
+                        <option value="">-- Select a level --</option>
                         <option value='beginner'>Beginner</option>
                         <option value='intermediate'>Intermediate</option>
                         <option value='advanced'>Advanced</option>

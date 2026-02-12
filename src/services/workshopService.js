@@ -37,4 +37,20 @@ const show = async (workshopId)=>{
 
 }
 
-export {index, show}
+const create = async (workshopFormData)=>{
+    try {
+        const res = await fetch(`${BASE_URL}`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: workshopFormData,
+        })
+        return res.json()
+    }catch(err){
+        throw new Error(err)
+    }
+
+}
+
+export {index, show, create}
