@@ -60,15 +60,26 @@ const App = () => {
   }
 
   const handleRegisterWorkshop = async(workshopId) =>{
-    const {registration, workshop} = await workshopService.registerWorkshop(workshopId)
+    const {registration, updated_workshop} = await workshopService.registerWorkshop(workshopId)
     setWorkshops(prev =>
       prev.map(workshopCurrent =>
-        workshopCurrent.id === workshop.id? workshop :workshopCurrent,
+        workshopCurrent.id === updated_workshop.id? {...workshopCurrent, ...updated_workshop} :workshopCurrent,
       ),
     )
     return registration
 
   }
+
+  const handleCancelRegistration = async(workshopId) =>{
+    const {cancellation, updated_workshop} = await workshopService.cancelWorkshop(workshopId)
+    setWorkshops(prev =>
+      prev.map(workshopCurrent =>
+        workshopCurrent.id === updated_workshop.id? {...workshopCurrent, ...updated_workshop} :workshopCurrent,
+      ),
+    )
+    return cancellation
+  }
+
 
   return(
     <>
@@ -79,7 +90,7 @@ const App = () => {
           <>
           
             <Route path='/workshops' element={<WorkshopList workshops={workshops}/>}></Route>
-            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop} handleRegisterWorkshop={handleRegisterWorkshop}/>}></Route>
+            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop} handleRegisterWorkshop={handleRegisterWorkshop} handleCancelRegistration={handleCancelRegistration}/>}></Route>
 
             {user.role === "instructor" && (
               <>

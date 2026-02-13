@@ -6,20 +6,25 @@ import * as workshopService from '../../services/workshopService'
 import * as userService from '../../services/userService'
 import { UserContext } from "../../contexts/UserContext"
 
-const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop}) =>{
+const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCancelRegistration}) =>{
     const {workshopId} = useParams()
 
     const [workshop, setWorkshop]= useState(null)
     const [registration, setRegistration] = useState(null)
-    const [message, setMessage] = useState("")
+    const [successMessage,setSuccessMessage]=useState("")
+    const [error, setError] = useState("")
 
     const {user} = useContext(UserContext)
 
     useEffect(()=>{
         const fetchWorkshop = async () =>{
-            const workshopData = await workshopService.show(workshopId)
-            console.log(workshopData)
-            setWorkshop(workshopData)
+            try {
+                const workshopData = await workshopService.show(workshopId)
+                setWorkshop(workshopData)
+                setError("") 
+            } catch (err) {
+                setError(err.message)
+            }
         }
         fetchWorkshop()
     }, [workshopId])
@@ -27,29 +32,61 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop}) =>{
     useEffect(() => {
         const fetchRegistration = async () => {
             try {
-            const {registration} = await userService.getMyRegistrationForWorkshop(workshopId)
-            console.log(registration)
-            setRegistration(registration) 
-            } catch (e) {
-            setMessage(e.message)
+                const {registration} = await userService.getMyRegistrationForWorkshop(workshopId)
+                setRegistration(registration) 
+                setError("") 
+            } catch (err) {
+                setError(err.message)
             }
         }
         fetchRegistration()
     }, [workshopId])
 
+    useEffect(() => {
+        if (!successMessage) return
+
+        const timer = setTimeout(() => {
+            setSuccessMessage("")
+        }, 5000)
+
+        return () => clearTimeout(timer)
+    },[successMessage])
+
     const onRegister = async() =>{
         try {
-            const reg = await handleRegisterWorkshop(workshopId)
-            setRegistration(reg)
-            setMessage(" You are registered for this workshop!")
+            const registration = await handleRegisterWorkshop(workshopId)
+            setRegistration(registration)
+            setError("")
+            setSuccessMessage("Registration successful!")
+
         } catch (err) {
-            setMessage(err.message)
+            setError(err.message)
         }
     }
     
+    const onCancel = async()=>{
+        try {
+            const cancellation = await handleCancelRegistration(workshopId)
+            setRegistration(cancellation)
+            setError("")
+            setSuccessMessage("Cancellation successful!")
+        } catch (err) {
+            setError(err.message)
+        }
+    }
+
+
     if (!workshop) return <main>Loading...</main>
     return(
         <main>
+
+            {successMessage && (
+                <p className="success">{successMessage}</p>
+            )}
+
+            {error && (
+                <p className="error">{error}</p>
+            )}
             <div>
                 <h1>{workshop.title}</h1>
             </div>
@@ -75,13 +112,10 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop}) =>{
                 {user.role==='student' && (
                     <>
 
-
-                        {registration?.status ==='active' && <p> You are already registered</p>}
-                        {registration?.status ==='cancelled' && <p> You have cancelled your registration</p>}
-                        {message && <p>{message}</p>}        
-                        
+                        {registration?.status ==='cancelled' && <p> You have cancelled your registration for this workshop! </p>}
+                         
                         {(!registration || registration.status === "active") && (
-                            <button onClick={registration ? "onCancel" : onRegister}>
+                            <button onClick={registration ? onCancel : onRegister}>
                                 {registration?.status === "active"
                                 ? "Cancel registration"
                                 : "Reserve Your Spot"}
