@@ -9,6 +9,7 @@ import NavBar from './components/NavBar/NavBar';
 import WorkshopList from './components/WorkshopList/WorkshopList';
 import WorkshopDetail from './components/WorkshopDetails/WorkshopDetails.jsx';
 import WorkshopForm from './components/WorkshopForm/WorkshopForm.jsx'
+import MyWorkshops from './components/MyWorkshops/MyWorkshops.jsx'
 
 import * as workshopService from './services/workshopService.js'
 
@@ -30,7 +31,6 @@ const App = () => {
     }
     if (user) fetchAllWorkshops()
   },[user])
-
 
 
   const handleAddWorkshop = async( workshopFormData) =>{
@@ -85,25 +85,26 @@ const App = () => {
     <>
       <NavBar/>
       <Routes>
-        <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<h1>Hello world!</h1>}></Route>
+        <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<h1>Hello world!</h1>}/>
         {user? (
           <>
           
-            <Route path='/workshops' element={<WorkshopList workshops={workshops}/>}></Route>
-            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop} handleRegisterWorkshop={handleRegisterWorkshop} handleCancelRegistration={handleCancelRegistration}/>}></Route>
+            <Route path='/workshops' element={<WorkshopList workshops={workshops}/>}/>
+            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop} handleRegisterWorkshop={handleRegisterWorkshop} handleCancelRegistration={handleCancelRegistration}/>}/>
 
             {user.role === "instructor" && (
               <>
-                <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop} handleUpdateWorkshop={handleUpdateWorkshop}/>}></Route>
-                <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop} />} ></Route>
+                <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop} handleUpdateWorkshop={handleUpdateWorkshop}/>}/>
+                <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop} />} />
+                <Route path='/users/me/workshops' element={<MyWorkshops/>} />
               </>
             )}
 
           </>
         ):(
           <>
-            <Route path='/sign-up' element={<SignUpForm/>}></Route>
-            <Route path='/sign-in' element={<SignInForm/>}></Route>
+            <Route path='/sign-up' element={<SignUpForm/>}/>
+            <Route path='/sign-in' element={<SignInForm/>}/>
           </>
         )}
       </Routes>

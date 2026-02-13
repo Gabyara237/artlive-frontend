@@ -18,4 +18,21 @@ const getMyRegistrationForWorkshop = async (workshopId) => {
     }
 }
 
-export {getMyRegistrationForWorkshop}
+const getMyWorkshops = async () =>{
+    try{
+        const res = await fetch(`${BASE_URL}/me/workshops`, {
+            headers: { 
+                Authorization: `Bearer ${localStorage.getItem("token")}` 
+            },
+        })
+
+        if (!res.ok){
+            const errorData = await res.json()
+                throw new Error(errorData.err)
+        }
+        return res.json()
+    }catch (err){
+        throw new Error(err)
+    }
+}
+export {getMyRegistrationForWorkshop, getMyWorkshops}
