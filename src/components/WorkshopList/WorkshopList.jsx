@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import WorkshopsMap from "../WorkshopsMap/WorkshopsMap"
 
 const WorkshopList = ({workshops}) =>{
 
@@ -18,7 +19,8 @@ const WorkshopList = ({workshops}) =>{
                     </div>
                 </Link>
 
-            ))}   
+            ))} 
+            <WorkshopsMap workshops={workshops} />  
         </main>
     )
 

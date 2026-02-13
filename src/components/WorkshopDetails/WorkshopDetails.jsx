@@ -4,7 +4,11 @@ import { Link, useParams } from "react-router"
 
 import * as workshopService from '../../services/workshopService'
 import * as userService from '../../services/userService'
+
+import WorkshopsMap from "../WorkshopsMap/WorkshopsMap"
 import { UserContext } from "../../contexts/UserContext"
+
+
 
 const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCancelRegistration}) =>{
     const {workshopId} = useParams()
@@ -108,6 +112,7 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
                 <p>{workshop.created_at}</p>
             </div>
             <div>
+                <WorkshopsMap workshops={[workshop]} />
                 
                 {user.role==='student' && (
                     <>
