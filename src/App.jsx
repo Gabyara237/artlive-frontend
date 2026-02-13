@@ -10,6 +10,7 @@ import WorkshopList from './components/WorkshopList/WorkshopList';
 import WorkshopDetail from './components/WorkshopDetails/WorkshopDetails.jsx';
 import WorkshopForm from './components/WorkshopForm/WorkshopForm.jsx'
 import MyWorkshops from './components/MyWorkshops/MyWorkshops.jsx'
+import MyRegistrations from './components/MyRegistrations/MyRegistrations.jsx'
 
 import * as workshopService from './services/workshopService.js'
 
@@ -98,6 +99,10 @@ const App = () => {
                 <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop} />} />
                 <Route path='/users/me/workshops' element={<MyWorkshops/>} />
               </>
+            )}
+
+            {user.role === "student" && (
+              <Route path='/users/me/registrations' element={<MyRegistrations/>}/>
             )}
 
           </>

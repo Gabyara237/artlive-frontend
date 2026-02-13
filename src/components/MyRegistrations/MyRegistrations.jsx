@@ -4,17 +4,16 @@ import WorkshopList from '../WorkshopList/WorkshopList'
 
 
 
-
-const MyWorkshops = ()=>{
-    const [myWorkshops, setMyWorkshops] = useState([])
+const MyRegistrations = ()=>{
+    const [myRegistrations, setMyRegistrations] = useState([])
     const [error, setError] = useState("")
       
     useEffect(() => {
         const fetchMyWorkshops = async () => {
             try {
-                const {workshops} = await userService.getMyWorkshops();
-                console.log(workshops)
-                setMyWorkshops(workshops);
+                const {registrations} = await userService.getMyRegistrations();
+                console.log(registrations)
+                setMyRegistrations(registrations);
                 setError("");
             } catch (err) {
                 setError(err.message);
@@ -23,13 +22,13 @@ const MyWorkshops = ()=>{
         fetchMyWorkshops();
     }, [])
 
-    const workshopsForList = myWorkshops.map(workshop => ({
-        id: workshop.workshop_id,          
-        title: workshop.title,
-        art_type: workshop.art_type,
-        level: workshop.level,
-        workshop_date: workshop.workshop_date,
-        start_time: workshop.start_time,
+    const workshopsForList = myRegistrations.map(registration => ({
+        id: registration.workshop_id,          
+        title: registration.title,
+        art_type: registration.art_type,
+        level: registration.level,
+        workshop_date: registration.workshop_date,
+        start_time: registration.start_time,
     }))
 
     if (error) return <p>{error}</p>
@@ -42,4 +41,4 @@ const MyWorkshops = ()=>{
     )
 }
 
-export default MyWorkshops
+export default MyRegistrations

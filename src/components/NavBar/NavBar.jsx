@@ -25,7 +25,11 @@ const NavBar = () =>{
                             <Link to="/users/me/workshops"> My Workshops</Link>
                         </>
                     )}
+                    {user?.role === "student" && (
 
+                        <Link to="/users/me/registrations"> My Workshops </Link>
+
+                    )}
                     <Link to='/' onClick={handleSignOut}> Sign Out </Link>
                 
                 </>

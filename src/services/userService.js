@@ -1,5 +1,24 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`
 
+const getMyRegistrations = async () => {
+    try{
+        const res = await fetch(`${BASE_URL}/me/registrations`, {
+            headers: { 
+                Authorization: `Bearer ${localStorage.getItem("token")}` 
+            },
+        })
+
+        if (!res.ok){
+            const errorData = await res.json()
+                throw new Error(errorData.err)
+        }
+        return res.json()
+  }catch (err){
+        throw new Error(err)
+    }
+}
+
+
 const getMyRegistrationForWorkshop = async (workshopId) => {
     try{
         const res = await fetch(`${BASE_URL}/me/registrations/workshops/${workshopId}`, {
@@ -35,4 +54,7 @@ const getMyWorkshops = async () =>{
         throw new Error(err)
     }
 }
-export {getMyRegistrationForWorkshop, getMyWorkshops}
+
+
+
+export {getMyRegistrationForWorkshop, getMyWorkshops, getMyRegistrations}
