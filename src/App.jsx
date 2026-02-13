@@ -12,6 +12,7 @@ import WorkshopForm from './components/WorkshopForm/WorkshopForm.jsx'
 
 import * as workshopService from './services/workshopService.js'
 
+
 import { UserContext } from './contexts/UserContext';
 
 
@@ -21,6 +22,7 @@ const App = () => {
 
   const [workshops, setWorkshops] = useState([])
 
+
   useEffect(()=>{
     const fetchAllWorkshops = async() =>{ 
       const workshopData = await workshopService.index()
@@ -28,6 +30,7 @@ const App = () => {
     }
     if (user) fetchAllWorkshops()
   },[user])
+
 
 
   const handleAddWorkshop = async( workshopFormData) =>{
@@ -56,6 +59,17 @@ const App = () => {
     navigate('/workshops')
   }
 
+  const handleRegisterWorkshop = async(workshopId) =>{
+    const {registration, workshop} = await workshopService.registerWorkshop(workshopId)
+    setWorkshops(prev =>
+      prev.map(workshopCurrent =>
+        workshopCurrent.id === workshop.id? workshop :workshopCurrent,
+      ),
+    )
+    return registration
+
+  }
+
   return(
     <>
       <NavBar/>
@@ -65,7 +79,7 @@ const App = () => {
           <>
           
             <Route path='/workshops' element={<WorkshopList workshops={workshops}/>}></Route>
-            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop}/>}></Route>
+            <Route path='/workshops/:workshopId' element={<WorkshopDetail handleDeleteWorkshop={handleDeleteWorkshop} handleRegisterWorkshop={handleRegisterWorkshop}/>}></Route>
 
             {user.role === "instructor" && (
               <>

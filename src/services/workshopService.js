@@ -95,4 +95,24 @@ const deleteWorkshop = async (workshopId) =>{
     }
 }
 
-export {index, show, create, updateWorkshop, deleteWorkshop}
+const registerWorkshop = async (workshopId)=>{
+    try{
+        const res = await fetch(`${BASE_URL}/${workshopId}/registrations`,{
+            method: 'POST',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+        if (!res.ok) {
+            const errorData = await res.json()
+            throw new Error(errorData.err)
+        }
+        return res.json()
+    }catch (err){
+        throw new Error(err)
+    }
+
+}
+
+
+export {index, show, create, updateWorkshop, deleteWorkshop, registerWorkshop}
