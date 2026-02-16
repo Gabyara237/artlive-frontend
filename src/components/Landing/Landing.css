@@ -1,0 +1,65 @@
+.button {
+    padding: 9px 30px;
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+
+.icon-landing{
+    width: 120px;
+    height: 120px;
+}
+
+.container-icons-description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.landing-container{
+    margin-top: 1px;
+    padding-bottom: 20px;
+}
+
+.hero-section {
+  position: relative;
+  background-image: url('../src/assets/wooden-board-art-studio-with-vibrant-paints-creative-artworks.jpg');
+  background-size: cover;
+  background-position: center;
+  
+  height: 500px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,0) 100%
+  );
+  
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 60%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+
+.text{
+    padding-top: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(245,239,232,0.95) 0%,
+    rgba(245,239,232,0.85) 40%,
+    rgba(245,239,232,0.75) 100%
+  );
+}

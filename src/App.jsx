@@ -11,6 +11,7 @@ import WorkshopDetail from './components/WorkshopDetails/WorkshopDetails.jsx';
 import WorkshopForm from './components/WorkshopForm/WorkshopForm.jsx'
 import MyWorkshops from './components/MyWorkshops/MyWorkshops.jsx'
 import MyRegistrations from './components/MyRegistrations/MyRegistrations.jsx'
+import Landing from './components/Landing/Landing.jsx'
 
 import * as workshopService from './services/workshopService.js'
 
@@ -86,7 +87,7 @@ const App = () => {
     <>
       <NavBar/>
       <Routes>
-        <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<h1>Hello world!</h1>}/>
+        <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<Landing/>}/>
         {user? (
           <>
           
