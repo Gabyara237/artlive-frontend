@@ -1,0 +1,26 @@
+.nav-bar{
+    display: flex ;
+    justify-content: space-around;
+    font-size: 20px;
+    background-color:#F5EFE8;
+    align-items: center;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo{
+    margin: 0;
+}
+.navbar-actions{
+
+    display: flex;
+    gap:30px;
+}
+
+.highlight{
+    background-color: #ae3e09;
+    color: #ffffff;
+    padding: 1px 30px;
+    border-radius: 10px;
+    font-weight: 800;
+}
+
