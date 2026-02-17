@@ -6,10 +6,12 @@ import IconInstructor from '../icons/IconInstructor'
 import IconMeet from '../icons/IconMeet'
 import './Landing.css'
 
+import bgArtworks from'../../assets/bgArtworks.jpg'
+
 const Landing =()=>{
     return (
         <div className="landing-container">
-            <div className='hero-section'>
+            <div className='hero-section' style={{ backgroundImage: `url(${bgArtworks})` }}>
                 <div className='text'>
                     <h1>Discover Creative Workshops Near You</h1>
                     <p>Ignite your Inner artist. Join inspiring classes led by </p>
