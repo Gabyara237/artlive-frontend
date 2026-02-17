@@ -106,7 +106,7 @@ const WorkshopsMap = ({workshops}) => {
           Longitude: {center[0].toFixed(4)} | Latitude: {center[1].toFixed(4)} | Zoom: {zoom.toFixed(2)}
       </div>
       
-      {mapMoved && (<button className='btn-art' onClick={handleButtonClick}>
+      {mapMoved && (<button className='reset-button' onClick={handleButtonClick}>
         Reset
       </button>)}
 
