@@ -24,12 +24,14 @@ const MyWorkshops = ()=>{
     }, [])
 
     const workshopsForList = myWorkshops.map(workshop => ({
-        id: workshop.workshop_id,          
+        id: workshop.id,          
         title: workshop.title,
         art_type: workshop.art_type,
         level: workshop.level,
         workshop_date: workshop.workshop_date,
         start_time: workshop.start_time,
+        latitude: workshop.latitude,
+        longitude: workshop.longitude
     }))
 
     if (error) return <p>{error}</p>
