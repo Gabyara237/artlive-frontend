@@ -110,7 +110,7 @@ const WorkshopsMap = ({workshops}) => {
         Reset
       </button>)}
 
-      <div ref={mapContainerRef} style={{ height: "400px", width: "100%", backgroundColor: "lightgrey",}}/>
+      <div ref={mapContainerRef} style={{ height: "85%", width: "100%", backgroundColor: "lightgrey",borderRadius: "18px"}}/>
       {mapInstance && workshops?.map((workshop)=>{
         return(
           <WorkshopMarker key={workshop.id} map={mapInstance} workshop={workshop} />
