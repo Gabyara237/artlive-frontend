@@ -1,6 +1,7 @@
 
 import { useContext, useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router';
+import { Route, Routes, useNavigate, useLocation} from 'react-router';
+
 import './App.css'
 
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -82,10 +83,15 @@ const App = () => {
     return cancellation
   }
 
+  const location = useLocation();
+
+  const hideNavbarRoutes = ["/sign-in", "/sign-up"];
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+
 
   return(
     <>
-      <NavBar/>
+      {!shouldHideNavbar && <NavBar/>}
       <Routes>
         <Route path={'/'} element ={user?<WorkshopList workshops={workshops}/> :<Landing/>}/>
         {user? (
