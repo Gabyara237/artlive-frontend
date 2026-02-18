@@ -1,0 +1,99 @@
+.workshop-detail{
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgb(245 239 232);
+    border: 1px solid rgba(120, 80, 50, 0.15);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+}
+
+.img-detail{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.workshop-info-basic{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+}
+
+.container-workshop-img-detail{
+
+    margin: 0px;
+    padding: 0px;
+    width: 70%;
+    mask-image: linear-gradient(
+        to right,
+        rgba(0,0,0,1) 30%,
+        rgba(0,0,0,0) 100%
+    );
+
+}
+
+.info-basic{
+    justify-items: flex-start;
+    margin-left: -20px;
+}
+
+.p-info-basic{
+    font-weight: 600;
+}
+
+.span-p{
+    font-weight: 400;
+}
+
+.container-workshop-detail{
+    padding: 20px 70px;
+}
+
+.workshop-map-detail{
+    height: 90vh;
+}
+
+.container-detail{
+    height: 90vh;
+}
+
+.actions-detail{
+    
+    justify-content: right;
+    padding: 0px 80px;
+    display: flex;
+    gap: 30px;
+
+}
+
+.delete-button{
+    cursor: pointer;
+}
+
+.highlight-detail:hover, .detail:hover{
+    transform: scale(1.01);
+}
+
+.detail{
+    padding: 12px 30px;
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+    .container-workshop-detail {
+        padding: 20px 0px;
+    }
+    .workshop-detail {
+        max-width: 100%;
+    }
+
+    .workshop-info-basic {
+        flex-direction: column;
+    }
+
+    .container-workshop-img-detail{
+        width: 100%;
+        mask-image: none;
+    }
+}

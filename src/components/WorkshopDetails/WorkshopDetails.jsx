@@ -6,8 +6,11 @@ import * as workshopService from '../../services/workshopService'
 import * as userService from '../../services/userService'
 
 import WorkshopsMap from "../WorkshopsMap/WorkshopsMap"
+import './WorkshopDetails.css'
 import { UserContext } from "../../contexts/UserContext"
 
+import formatDateTime from '../../utils/formatDateTime'
+import Tabs from "../Tabs/Tabs"
 
 
 const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCancelRegistration}) =>{
@@ -17,6 +20,7 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
     const [registration, setRegistration] = useState(null)
     const [successMessage,setSuccessMessage]=useState("")
     const [error, setError] = useState("")
+
 
     const {user} = useContext(UserContext)
 
@@ -56,6 +60,7 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
         return () => clearTimeout(timer)
     },[successMessage])
 
+
     const onRegister = async() =>{
         try {
             const registration = await handleRegisterWorkshop(workshopId)
@@ -79,10 +84,13 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
         }
     }
 
-
+    
     if (!workshop) return <main>Loading...</main>
+    const workshop_date= workshop.workshop_date;
+    const start_time = workshop.start_time
+
     return(
-        <main>
+        <main className="container-workshop-detail">
 
             {successMessage && (
                 <p className="success">{successMessage}</p>
@@ -91,36 +99,14 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
             {error && (
                 <p className="error">{error}</p>
             )}
-            <div>
-                <h1>{workshop.title}</h1>
-            </div>
-            <div>
-                <p>{workshop.description}</p>
-                <p>{workshop.instructor_username}</p>
-                <p>{workshop.art_type}</p>
-                <p>{workshop.level}</p>
-                <p>{workshop.workshop_date}</p>
-                <p>{workshop.start_time}</p>
-                <p>{workshop.duration_hours}</p>
-                <p>{workshop.address}</p>
-                <p>{workshop.city}</p>
-                <p>{workshop.state}</p>
-                <p>{workshop.max_capacity}</p>
-                <p>{workshop.materials_included}</p>
-                <p>{workshop.materials_to_bring}</p>
-                <img src={workshop.image_url}/>
-                <p>{workshop.created_at}</p>
-            </div>
-            <div>
-                <WorkshopsMap workshops={[workshop]} />
-                
+            <div className="details-action">
                 {user.role==='student' && (
                     <>
-
+                
                         {registration?.status ==='cancelled' && <p> You have cancelled your registration for this workshop! </p>}
-                         
+                        
                         {(!registration || registration.status === "active") && (
-                            <button onClick={registration ? onCancel : onRegister}>
+                            <button className="highlight detail" onClick={registration ? onCancel : onRegister}>
                                 {registration?.status === "active"
                                 ? "Cancel registration"
                                 : "Reserve Your Spot"}
@@ -128,15 +114,49 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
                         )}  
                     </>
                 )}
-
+                
                 {workshop.instructor_id === user.id && (
-                    <>
-                        <Link to={`/workshops/${workshopId}/edit`}>Edit</Link>  
-                         <button onClick={() => handleDeleteWorkshop(workshopId)}>
+                    <div className="actions-detail">
+                        <Link className="highlight highlight-detail" to={`/workshops/${workshopId}/edit`}>Edit</Link>  
+                        <button className="cancel-button delete-button" onClick={() => handleDeleteWorkshop(workshopId)}>
                             Delete
                         </button>
-                    </>
+                    </div>
                 )}
+
+            </div>
+            <div className="container-workshop-list container-detail">
+
+                <div className="workshop-list workshop-detail">
+                    <div>
+                        <div className="workshop-info-basic">
+                            <div className="container-workshop-img-detail">
+                                <img className="img-detail" src={workshop.image_url}/>
+
+                            </div>
+                            <div className="info-basic">
+                                <h1>{workshop.title}</h1>
+                                <p className="p-info-basic">Instructor: <span className="span-p">{workshop.instructor_username}</span></p>
+                                <p className="p-info-basic"> Date: <span className="span-p">{formatDateTime(workshop_date, start_time)}</span></p>
+                                <p className="p-info-basic">Workshop duration: <span className="span-p">{workshop.duration_hours} hours</span></p>
+                                <p className="p-info-basic">Max capacity: <span className="span-p">{workshop.max_capacity}</span></p>
+                                <div className="container-tags">
+                                    <p className="container-tag">{workshop.level}</p>
+                                    <p className="container-tag">{workshop.art_type}</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <Tabs workshop={workshop}/>
+                    </div>
+
+                </div>
+                <div className="workshop-map workshop-map-detail">
+                    
+                    <WorkshopsMap workshops={[workshop]} />
+                    
+                </div>
             </div>
         </main>
     )
