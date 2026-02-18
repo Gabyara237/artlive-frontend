@@ -38,7 +38,6 @@ const MyWorkshops = ()=>{
 
     return(
         <main>
-            <h1>My workshops</h1>
             <WorkshopList workshops={workshopsForList} />
         </main>
     )
