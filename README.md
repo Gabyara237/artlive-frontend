@@ -42,15 +42,15 @@ The UI follows a soft, artistic aesthetic inspired by watercolor textures and na
 ## Application Screenshots
 
 ### Workshop Discovery
-![Workshop Discovery](#)
+![Workshop Discovery](https://i.postimg.cc/Bqmv15Zw/Screenshot-2026-02-18-at-2-51-33-AM.png)
 *Interactive workshop exploration with map visualization and dynamic filters.*
 
 ### Workshop Details
-![Workshop Details](#)
+![Workshop Details](https://i.postimg.cc/52MXnfD5/Screenshot-2026-02-18-at-3-02-20-AM.png)
 *Detailed workshop page with instructor info, materials, and registration options.*
 
 ### Create Workshop – Instructor View
-![Create Workshop – Instructor View](#)
+![Create Workshop – Instructor View](https://i.postimg.cc/QtWD2TTT/Screenshot-2026-02-18-at-1-21-38-AM.png)
 *Instructors can create and manage workshops with image upload and structured form inputs.*
 
 
