@@ -30,7 +30,8 @@ const MyRegistrations = ()=>{
         workshop_date: registration.workshop_date,
         start_time: registration.start_time,
         latitude: registration.latitude,
-        longitude: registration.longitude
+        longitude: registration.longitude,
+        image_url:registration.image_url
     }))
 
     if (error) return <p>{error}</p>

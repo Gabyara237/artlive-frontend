@@ -31,7 +31,9 @@ const MyWorkshops = ()=>{
         workshop_date: workshop.workshop_date,
         start_time: workshop.start_time,
         latitude: workshop.latitude,
-        longitude: workshop.longitude
+        longitude: workshop.longitude,
+        image_url:workshop.image_url
+
     }))
 
     if (error) return <p>{error}</p>
