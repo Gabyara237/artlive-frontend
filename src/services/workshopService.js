@@ -32,6 +32,7 @@ const show = async (workshopId)=>{
         }
         return res.json()
     }catch(err){
+        console.log(err)
         throw new Error(err)
     }
 
@@ -132,6 +133,24 @@ const cancelWorkshop = async(workshopId) =>{
     }
 }
 
+const getRegistrations = async (workshopId) => {
+    try{
+        const res = await fetch(`${BASE_URL}/${workshopId}/registrations`,{
+            headers:{ 
+                Authorization: `Bearer ${localStorage.getItem("token")}` 
+            },
+        });
+
+        const data = await res.json() ; 
+        if (!res.ok) {
+            throw new Error(data.err || "Failed to fetch registrations");
+        }
+        console.log(data)
+        return data
+    }catch (err){
+            throw new Error(err)
+    }
+};
 
 
-export {index, show, create, updateWorkshop, deleteWorkshop, registerWorkshop, cancelWorkshop}
+export {index, show, create, updateWorkshop, deleteWorkshop, registerWorkshop, cancelWorkshop, getRegistrations}

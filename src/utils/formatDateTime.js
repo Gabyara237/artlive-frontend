@@ -1,7 +1,5 @@
 const formatDateTime = (dateStr, timeStr) => {
   const d = new Date(`${dateStr}T${timeStr}:00`);
-
-  const weekday = d.toLocaleDateString("en-US", { weekday: "long" });
   const month = d.toLocaleDateString("en-US", { month: "short" });
   const day = d.getDate();
 
@@ -11,7 +9,7 @@ const formatDateTime = (dateStr, timeStr) => {
     hour12: true,
   });
 
-  return `${weekday}, ${month} ${day} at ${time}`;
+  return `${month} ${day} at ${time}`;
 };
 
 export default formatDateTime

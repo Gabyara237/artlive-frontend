@@ -117,7 +117,8 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
                 
                 {workshop.instructor_id === user.id && (
                     <div className="actions-detail">
-                        <Link className="highlight highlight-detail" to={`/workshops/${workshopId}/edit`}>Edit</Link>  
+                        <Link className="highlight highlight-detail"  to={`/workshops/${workshopId}/registrations`}>View Registrations <span className="span-registrations">{workshop.current_registrations}</span></Link>
+                        <Link className="highlight highlight-detail" to={`/workshops/${workshopId}/edit`}>Edit</Link>
                         <button className="cancel-button delete-button" onClick={() => handleDeleteWorkshop(workshopId)}>
                             Delete
                         </button>
@@ -137,12 +138,13 @@ const WorkshopDetail = ({handleDeleteWorkshop, handleRegisterWorkshop, handleCan
                             <div className="info-basic">
                                 <h1>{workshop.title}</h1>
                                 <p className="p-info-basic">Instructor: <span className="span-p">{workshop.instructor_username}</span></p>
-                                <p className="p-info-basic"> Date: <span className="span-p">{formatDateTime(workshop_date, start_time)}</span></p>
+                                <p className="p-info-basic">Date: <span className="span-p">{formatDateTime(workshop_date, start_time)}</span></p>
+                                <p className="p-info-basic">Address: <span className="span-p">{workshop.address} - {workshop.city} - {workshop.state} </span></p>
                                 <p className="p-info-basic">Workshop duration: <span className="span-p">{workshop.duration_hours} hours</span></p>
-                                <p className="p-info-basic">Max capacity: <span className="span-p">{workshop.max_capacity}</span></p>
+                                {workshop.instructor_id === user.id? <p className="p-info-basic">Registered: <span className="span-p">{workshop.current_registrations}/{workshop.max_capacity}</span></p>:<p className="p-info-basic">Max capacity: <span className="span-p">{workshop.max_capacity}</span></p>}
                                 <div className="container-tags">
-                                    <p className="container-tag">{workshop.level}</p>
-                                    <p className="container-tag">{workshop.art_type}</p>
+                                    <p className="container-tag container-tag2">{workshop.level}</p>
+                                    <p className="container-tag container-tag2">{workshop.art_type}</p>
                                 </div>
 
                             </div>

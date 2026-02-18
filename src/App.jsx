@@ -13,6 +13,7 @@ import WorkshopForm from './components/WorkshopForm/WorkshopForm.jsx'
 import MyWorkshops from './components/MyWorkshops/MyWorkshops.jsx'
 import MyRegistrations from './components/MyRegistrations/MyRegistrations.jsx'
 import Landing from './components/Landing/Landing.jsx'
+import WorkshopRegistrations from './components/WorkshopRegistrations/WorkshopRegistrations.jsx'
 
 import * as workshopService from './services/workshopService.js'
 
@@ -105,6 +106,7 @@ const App = () => {
                 <Route path="/workshops/new" element={<WorkshopForm handleAddWorkshop={handleAddWorkshop} handleUpdateWorkshop={handleUpdateWorkshop}/>}/>
                 <Route path="/workshops/:workshopId/edit" element={ <WorkshopForm handleUpdateWorkshop={handleUpdateWorkshop} />} />
                 <Route path='/users/me/workshops' element={<MyWorkshops/>} />
+                <Route path="/workshops/:workshopId/registrations" element={<WorkshopRegistrations/>} />
               </>
             )}
 

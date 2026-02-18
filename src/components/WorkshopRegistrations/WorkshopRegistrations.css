@@ -1,0 +1,139 @@
+.registrations-container{
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.registrations-header{
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(60, 40, 20, 0.10);
+  box-shadow: 0 12px 30px rgba(20, 10, 2, 0.10);
+}
+
+.registrations-title{
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.registrations-subtitle{
+  margin: 6px 0 0;
+  opacity: 0.75;
+}
+
+.registrations-metrics{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.span-metric{
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  border: 1px solid rgba(60, 40, 20, 0.14);
+  background: rgba(255,255,255,0.75);
+}
+
+.metric-active{
+  background: rgba(210, 255, 230, 0.55);
+}
+
+.metric-cancelled{
+  background: rgba(255, 220, 220, 0.55);
+}
+
+.registrations-toolbar{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.input-filter-registration{
+  flex: 1 1 320px;
+}
+
+
+.registrations-error{
+  margin-top: 12px;
+  color: #b42318;
+}
+
+.registrations-list{
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+
+.registration-avatar{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: rgba(245, 236, 226, 0.90);
+  border: 1px solid rgba(60, 40, 20, 0.12);
+}
+
+.registration-info-card{
+  flex: 1;
+  min-width: 0;
+}
+
+.registration-info-basic{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.registration-name{
+  margin: 0;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.registration-email{
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.p-registration-info-dates{
+  margin: 8px 0 0;
+  font-size: 13px;
+
+}
+
+.registration-status{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(60, 40, 20, 0.14);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.registration-status.isActive{
+  background: rgba(210, 255, 230, 0.65);
+}
+
+.registration-status.isCancelled{
+  background: rgba(255, 220, 220, 0.65);
+}
+
+.registrations-empty{
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(60, 40, 20, 0.10);
+}
