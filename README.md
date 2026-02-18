@@ -42,7 +42,7 @@ The UI follows a soft, artistic aesthetic inspired by watercolor textures and na
 ## Application Screenshots
 
 ### Workshop Discovery
-![Workshop Discovery](https://i.postimg.cc/Bqmv15Zw/Screenshot-2026-02-18-at-2-51-33-AM.png)
+![Workshop Discovery](https://i.postimg.cc/wxnMjDcT/Screenshot-(1).png)
 *Interactive workshop exploration with map visualization and dynamic filters.*
 
 ### Workshop Details
