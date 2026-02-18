@@ -20,6 +20,10 @@
     text-decoration: none;
 
 }
+
+.nav-link:hover{
+  transform: translateY(-1px);
+}
 .nav-links {
     display: flex;
     align-items: center;

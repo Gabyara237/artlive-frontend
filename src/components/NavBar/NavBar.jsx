@@ -33,7 +33,7 @@ const NavBar = () =>{
                 {user?(
                     <>
                         <NavLink className={getActiveClassName} to='/' onClick={() => setIsOpen(false)}> Home </NavLink>
-                        <NavLink className={getActiveClassName} end to='/workshops' onClick={() => setIsOpen(false)}>Workshops</NavLink>
+                        <NavLink className={getActiveClassName} end to='/workshops' onClick={() => setIsOpen(false)}>Discover</NavLink>
 
                         {user?.role === "instructor" && (
                             <>
@@ -42,7 +42,7 @@ const NavBar = () =>{
                             </>
                         )}
                         {user?.role === "student" && (
-                            <NavLink className={getActiveClassName} to="/users/me/registrations" onClick={() => setIsOpen(false)}> My Workshops </NavLink>
+                            <NavLink className={getActiveClassName} to="/users/me/registrations" onClick={() => setIsOpen(false)}> My classes </NavLink>
                         )}
             
                         <Link className="nav-link" to='/' onClick={handleSignOut}> Sign Out </Link>
