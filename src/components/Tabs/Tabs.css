@@ -1,0 +1,108 @@
+.tabs-card{
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.tabs-header{
+  display: flex;
+  gap: 14px;
+  padding: 14px 18px 0 18px;
+  border-bottom: 1px solid rgba(120, 86, 64, 0.18);
+  background: rgba(246, 238, 228, 0.55);
+}
+
+.tab-button{
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 10px 4px 12px 4px;
+  font-family: inherit;
+  font-size: 18px;
+  color: rgba(92, 58, 40, 0.75);
+  cursor: pointer;
+  position: relative;
+}
+
+.tab-button.active{
+  color: rgba(92, 58, 40, 1);
+}
+
+.tab-button.active::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 4px;
+  width: 100%;
+  border-radius: 4px;
+  background: rgba(140, 87, 54, 0.85);
+}
+
+.tabs-body{
+    text-align: left;
+    padding: 16px 18px 18px 18px;
+}
+
+.tab-panel{
+  min-height: 110px;
+}
+
+.tab-text{
+  margin: 0;
+  line-height: 1.55;
+  color: rgba(92, 58, 40, 0.9);
+}
+
+.container-instructor-info{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.instructor-avatar{
+  width: 78px;
+  height: 78px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.7);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.instructor-info{
+  flex: 1;
+  min-width: 0;
+}
+
+.instructor-name{
+  margin: 0;
+  font-size: 26px;
+  color: rgba(92, 58, 40, 1);
+}
+
+.instructor-address{
+  margin: 4px 0 8px 0;
+  color: rgba(92, 58, 40, 0.75);
+}
+
+.instructor-contact{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  color: rgba(92, 58, 40, 0.75);
+  margin-bottom: 12px;
+}
+
+.button-more{
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: rgba(246, 238, 228, 1);
+  background: rgba(140, 87, 54, 0.9);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+  cursor: pointer;
+}
+
+.button-more:hover{
+  transform: translateY(-1px);
+}
